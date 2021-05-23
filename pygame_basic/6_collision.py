@@ -38,7 +38,7 @@ enemy_size = character.get_rect().size  # 이미지의 크기를 구해옴
 enemy_width = character_size[0]  # 캐릭터의 가로크기
 enemy_height = character_size[1]  # 캐릭터의 세로크기
 enemy_x_pos = (screen_width / 2) - (enemy_width / 2)  # 화면 가로 크기의 절반(가로 축 중앙에 배치)
-enemy_y_pos = (screen_width / 2)  - (enemy_height / 2)  # 화면 크기 가장 아래의 위치
+enemy_y_pos = (screen_width / 2) - (enemy_height / 2)  # 화면 크기 가장 아래의 위치
 
 # 이벤트 루프
 running = True  # 게임이 진행중인지 확인
@@ -81,9 +81,22 @@ while running:
     elif character_y_pos > screen_height - character_height:
         character_y_pos = screen_height - character_height
 
+    # 충돌 처리를 위한 rect 정보 업데이트
+    character_rect = character.get_rect()
+    character_rect.left = character_x_pos
+    character_rect.top = character_y_pos
+
+    enemy_rect = enemy.get_rect()
+    enemy_rect.left = enemy_x_pos
+    enemy_rect.top = enemy_y_pos
+
+    # 충돌 체크
+    if character_rect.colliderect(enemy_rect):
+
+
     screen.blit(background, (0, 0))  # 배경 그리기
     screen.blit(character, (character_x_pos, character_y_pos))  # 캐릭터 그리기
-    screen.blit(enemy, (enemy_x_pos, enemy_y_pos)) # 적 그리기
+    screen.blit(enemy, (enemy_x_pos, enemy_y_pos))  # 적 그리기
 
     # 게임 화면을 다시 그리기! background가 계속 프레임에 뜨게 하기 위해서!
     pygame.display.update()
