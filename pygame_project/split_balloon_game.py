@@ -52,6 +52,14 @@ character_height = character_size[1]
 character_x_pos = screen_width/2 - character_width/2
 character_y_pos = screen_height - character_height
 
+
+weapon = pygame.image.load("images/weapon.png")
+weapon_size = weapon.get_rect().size
+weapon_width = weapon_size[0]
+weapon_height = weapon_size[1]
+weapon_x_pos = screen_width
+weapon_y_pos = screen_height
+
 running = True
 while running:
     dt = clock.tick(30)  # 게임화면의 초당 프레임 수
@@ -79,6 +87,7 @@ while running:
     # 5. 화면에 그리기 - screen.blit
     screen.blit(background, (0, 0))
     screen.blit(character, (character_x_pos, character_y_pos))
+    screen.blit(weapon, (weapon_x_pos, weapon_y_pos))
 
     pygame.display.update()
 
