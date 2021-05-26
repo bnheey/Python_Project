@@ -95,6 +95,10 @@ balloons.append({
     "init_speed_y": balloon_speed_y[0]  # y 최초 속도
 })
 
+# 사라질 무기와 공 정보 저장 변수
+weapon_to_remove = -1
+ballons_to_remove = -1
+
 running = True
 while running:
     dt = clock.tick(30)  # 게임화면의 초당 프레임 수
@@ -157,6 +161,78 @@ while running:
         balloon_val["pos_y"] += balloon_val["to_y"]
 
     # 4. 충돌 처리
+
+    # 캐릭터 rect 정보 업데이트
+    character_rect = character.get_rect()
+    character_rect.left = character_x_pos
+    character_rect.top = character_y_pos
+
+    for balloon_idx, balloon_val in enumerate(balloons):
+        balloon_pos_x = balloon_val["pos_x"]
+        balloon_pos_y = balloon_val["pos_y"]
+        balloon_img_idx = balloon_val["img_idx"]
+
+        # 공 rect 정보 업데이트
+        balloon_rect = balloon_images[balloon_img_idx].get_rect()
+        balloon_rect.left = balloon_pos_x
+        balloon_rect.top = balloon_pos_y
+
+        # 공과 캐릭터 충돌 처리
+        if character_rect.colliderect(balloon_rect):
+            running = False
+            break
+
+        # 공과 무기들 충돌 처리
+        for weapon_idx, weapon_val in enumerate(weapons):
+            weapon_x_pos = weapon_val[0]
+            weapon_y_pos = weapon_val[1]
+
+            # 무기 rect 정보 업데이트
+            weapon_rect = weapon.get_rect()
+            weapon_rect.left = weapon_x_pos
+            weapon_rect.top = weapon_y_pos
+
+            # 충돌 체크
+            if weapon_rect.colliderect(balloon_rect):
+                weapon_to_remove = weapon_idx  # 해당 무기를 없애기 위한 값 설정
+                ballons_to_remove = balloon_idx  # 해당 풍선을 없애기 위한 값 설정
+
+                if balloon_img_idx < 3:
+                    # 현재 공 크기 정보를 가지고 옴
+                    balloon_width = balloon_rect.size[0]
+                    balloon_height = balloon_rect.size[1]
+
+                    # 나눠진 공 정보
+                    small_balloon_rect = balloon_images[balloon_img_idx+1].get_rect()
+                    small_balloon_width = small_balloon_rect.size[0]
+                    small_balloon_height = small_balloon_rect.size[1]
+                    # 왼쪽으로 튕겨나가는 작은 공
+                    balloons.append({
+                        "pos_x": balloon_pos_x + (balloon_width / 2) - (small_balloon_width /2),  # 풍선의 x 좌표
+                        "pos_y": balloon_pos_y + (balloon_height/2) - (small_balloon_height/2),  # 풍선의 y좌표
+                        "img_idx": balloon_img_idx + 1,
+                        "to_x": -3,  # x축 이동 방향
+                        "to_y": -6,  # y축 이동 방향
+                        "init_speed_y": balloon_speed_y[balloon_img_idx + 1]  # y 최초 속도
+                    })
+                    # 오른쪽으로 튕겨나가는 작은 공
+                    balloons.append({
+                        "pos_x": balloon_pos_x + (balloon_width / 2) - (small_balloon_width /2),  # 풍선의 x 좌표
+                        "pos_y":  balloon_pos_y + (balloon_height/2) - (small_balloon_height/2),  # 풍선의 y좌표
+                        "img_idx": balloon_img_idx + 1,
+                        "to_x": +3,  # x축 이동 방향
+                        "to_y": -6,  # y축 이동 방향
+                        "init_speed_y": balloon_speed_y[balloon_img_idx  + 1]
+                    })
+                break
+
+    if ballons_to_remove > -1:
+        del balloons[ballons_to_remove]
+        ballons_to_remove = -1
+
+    if weapon_to_remove > -1:
+        del weapons[weapon_to_remove]
+        weapon_to_remove = -1
 
     # 5. 화면에 그리기 - screen.blit
     screen.blit(background, (0, 0))
