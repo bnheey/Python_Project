@@ -34,6 +34,9 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 # 화면 타이틀 설정
 pygame.display.set_caption("SPLIT BALLOON GAME")
 
+# 폰트 설정
+game_font = pygame.font.Font(None, 40)
+
 # 이동할 좌표
 character_to_x = 0
 # 이동 속도
@@ -43,7 +46,7 @@ character_speed = 0.6
 clock = pygame.time.Clock()
 
 # 1. 사용자 게임 초기화 (배경 화면, 게임 이미지, 좌표, 속도, 폰트 등)
-
+life = 3
 current_path = os.path.dirname(__file__)
 image_path = os.path.join(current_path, "images")
 
@@ -179,8 +182,13 @@ while running:
 
         # 공과 캐릭터 충돌 처리
         if character_rect.colliderect(balloon_rect):
-            running = False
-            break
+            if life == 0:
+                running = False
+                break
+            life -= 1
+            character_x_pos = 10
+            character_y_pos = screen_height - character_height - stage_height
+
 
         # 공과 무기들 충돌 처리
         for weapon_idx, weapon_val in enumerate(weapons):
@@ -203,13 +211,13 @@ while running:
                     balloon_height = balloon_rect.size[1]
 
                     # 나눠진 공 정보
-                    small_balloon_rect = balloon_images[balloon_img_idx+1].get_rect()
+                    small_balloon_rect = balloon_images[balloon_img_idx + 1].get_rect()
                     small_balloon_width = small_balloon_rect.size[0]
                     small_balloon_height = small_balloon_rect.size[1]
                     # 왼쪽으로 튕겨나가는 작은 공
                     balloons.append({
-                        "pos_x": balloon_pos_x + (balloon_width / 2) - (small_balloon_width /2),  # 풍선의 x 좌표
-                        "pos_y": balloon_pos_y + (balloon_height/2) - (small_balloon_height/2),  # 풍선의 y좌표
+                        "pos_x": balloon_pos_x + (balloon_width / 2) - (small_balloon_width / 2),  # 풍선의 x 좌표
+                        "pos_y": balloon_pos_y + (balloon_height / 2) - (small_balloon_height / 2),  # 풍선의 y좌표
                         "img_idx": balloon_img_idx + 1,
                         "to_x": -3,  # x축 이동 방향
                         "to_y": -6,  # y축 이동 방향
@@ -217,12 +225,12 @@ while running:
                     })
                     # 오른쪽으로 튕겨나가는 작은 공
                     balloons.append({
-                        "pos_x": balloon_pos_x + (balloon_width / 2) - (small_balloon_width /2),  # 풍선의 x 좌표
-                        "pos_y":  balloon_pos_y + (balloon_height/2) - (small_balloon_height/2),  # 풍선의 y좌표
+                        "pos_x": balloon_pos_x + (balloon_width / 2) - (small_balloon_width / 2),  # 풍선의 x 좌표
+                        "pos_y": balloon_pos_y + (balloon_height / 2) - (small_balloon_height / 2),  # 풍선의 y좌표
                         "img_idx": balloon_img_idx + 1,
                         "to_x": +3,  # x축 이동 방향
                         "to_y": -6,  # y축 이동 방향
-                        "init_speed_y": balloon_speed_y[balloon_img_idx  + 1]
+                        "init_speed_y": balloon_speed_y[balloon_img_idx + 1]
                     })
                 break
 
@@ -247,6 +255,9 @@ while running:
 
     screen.blit(stage, (0, stage_y_pos))
     screen.blit(character, (character_x_pos, character_y_pos))
+
+    now_life = game_font.render(str(int(life)), True, (0, 0, 0))
+    screen.blit(now_life, (10, 10))
 
     pygame.display.update()
 
