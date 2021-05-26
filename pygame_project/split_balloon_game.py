@@ -36,6 +36,11 @@ pygame.display.set_caption("SPLIT BALLOON GAME")
 
 # 폰트 설정
 game_font = pygame.font.Font(None, 40)
+total_time = 100
+start_ticks = pygame.time.get_ticks()
+
+# 게임 종료 메시지
+game_result = "GAME OVER"
 
 # 이동할 좌표
 character_to_x = 0
@@ -189,7 +194,6 @@ while running:
             character_x_pos = 10
             character_y_pos = screen_height - character_height - stage_height
 
-
         # 공과 무기들 충돌 처리
         for weapon_idx, weapon_val in enumerate(weapons):
             weapon_x_pos = weapon_val[0]
@@ -242,6 +246,11 @@ while running:
         del weapons[weapon_to_remove]
         weapon_to_remove = -1
 
+    # 모든 공을 없앤경우 게임 종료
+    if len(balloons) == 0:
+        game_result = "Mission Complete"
+        running = False
+
     # 5. 화면에 그리기 - screen.blit
     screen.blit(background, (0, 0))
     for weapon_x_pos, weapon_y_pos in weapons:
@@ -257,8 +266,25 @@ while running:
     screen.blit(character, (character_x_pos, character_y_pos))
 
     now_life = game_font.render(str(int(life)), True, (0, 0, 0))
-    screen.blit(now_life, (10, 10))
+    screen.blit(now_life, (screen_width - 30, 10))
+
+    elapsed_time = (pygame.time.get_ticks() - start_ticks) / 1000
+    timer = game_font.render(f"Time : {int(total_time - elapsed_time)}", True, (0, 0, 0))
+    screen.blit(timer, (10, 10))
+
+    # 시간 초과
+    if total_time - elapsed_time <= 0:
+        game_result = "Time Over"
+        running = False
 
     pygame.display.update()
+# 게임 오버 메시지 저장
+msg = game_font.render(game_result, True, (0, 0, 0))
+msg_rect = msg.get_rect(center=(int(screen_width / 2), int(screen_height / 2)))
+
+screen.blit(msg, msg_rect)
+pygame.display.update()
+
+pygame.time.delay(2000)
 
 pygame.quit()
