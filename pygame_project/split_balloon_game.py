@@ -45,12 +45,21 @@ clock = pygame.time.Clock()
 # 1. 사용자 게임 초기화 (배경 화면, 게임 이미지, 좌표, 속도, 폰트 등)
 background = pygame.image.load("images/background.png")
 
+
+stage = pygame.image.load("images/stage.png")
+stage_size = stage.get_rect().size
+stage_width = stage_size[0]
+stage_height = stage_size[1]
+stage_x_pos = 0
+stage_y_pos = screen_height - stage_height
+
+
 character = pygame.image.load("images/character.png")
 character_size = character.get_rect().size
 character_width = character_size[0]
 character_height = character_size[1]
 character_x_pos = screen_width/2 - character_width/2
-character_y_pos = screen_height - character_height
+character_y_pos = screen_height - character_height - stage_height
 
 
 weapon = pygame.image.load("images/weapon.png")
@@ -59,6 +68,7 @@ weapon_width = weapon_size[0]
 weapon_height = weapon_size[1]
 weapon_x_pos = screen_width
 weapon_y_pos = screen_height
+
 
 running = True
 while running:
@@ -88,6 +98,7 @@ while running:
     screen.blit(background, (0, 0))
     screen.blit(character, (character_x_pos, character_y_pos))
     screen.blit(weapon, (weapon_x_pos, weapon_y_pos))
+    screen.blit(stage, (stage_x_pos, stage_y_pos))
 
     pygame.display.update()
 
