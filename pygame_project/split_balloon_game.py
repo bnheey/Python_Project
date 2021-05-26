@@ -105,15 +105,18 @@ while running:
     # 무기 이동 조절
     weapons = [[w[0], w[1] - weapon_speed] for w in weapons]
 
+    # 천장에 닿은 무기 없애기
+    weapons = [[w[0], w[1]] for w in weapons if w[1] > 0]
+
     # 4. 충돌 처리
 
     # 5. 화면에 그리기 - screen.blit
     screen.blit(background, (0, 0))
+    for weapon_x_pos, weapon_y_pos in weapons :
+        screen.blit(weapon, (weapon_x_pos, weapon_y_pos))
     screen.blit(stage, (0, stage_y_pos))
     screen.blit(character, (character_x_pos, character_y_pos))
 
-    for weapon_x_pos, weapon_y_pos in weapons :
-        screen.blit(weapon, (weapon_x_pos, weapon_y_pos))
 
 
 
