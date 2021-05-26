@@ -237,6 +237,9 @@ while running:
                         "init_speed_y": balloon_speed_y[balloon_img_idx + 1]
                     })
                 break
+        else :
+            continue
+        break
 
     if ballons_to_remove > -1:
         del balloons[ballons_to_remove]
