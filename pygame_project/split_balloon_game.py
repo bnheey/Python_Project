@@ -16,7 +16,7 @@
 2. 무대 : 640 * 50 - stage.png
 3. 캐릭터 : 33 * 60 - character.png
 4. 무기 : 20 * 43 weapon.png
-5. 공 : 160 * 160, 80 * 80, 40 * 40, 20 * 20 - ball1.png ~ ball4/png
+5. 풍선 : 160 * 160, 80 * 80, 40 * 40, 20 * 20 - ball1.png ~ ball4/png
 '''
 import os
 
@@ -35,7 +35,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("SPLIT BALLOON GAME")
 
 # 이동할 좌표
-to_x = 0
+character_to_x = 0
 # 이동 속도
 character_speed = 0.6
 
@@ -71,6 +71,30 @@ weapons = []
 # 무기 이동 속도
 weapon_speed = 10
 
+# 풍선 만들기(4개 크기에 대해 따로 처리)
+balloon_images = [
+    pygame.image.load(os.path.join(image_path, "balloon1.png")),
+    pygame.image.load(os.path.join(image_path, "balloon2.png")),
+    pygame.image.load(os.path.join(image_path, "balloon3.png")),
+    pygame.image.load(os.path.join(image_path, "balloon4.png"))
+]
+
+# 풍선 크기에 따른 최초 스피드
+balloon_speed_y = [-18, -15, -12, -9]
+
+# 풍선들
+balloons = []
+
+# 최초 발생 큰 풍선 추가
+balloons.append({
+    "pos_x": 50,  # 풍선의 x 좌표
+    "pos_y": 50,  # 풍선의 y좌표
+    "img_idx": 0,
+    "to_x": 3,  # x축 이동 방향
+    "to_y": -6,  # y축 이동 방향
+    "init_speed_y": balloon_speed_y[0]  # y 최초 속도
+})
+
 running = True
 while running:
     dt = clock.tick(30)  # 게임화면의 초당 프레임 수
@@ -82,9 +106,9 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                to_x -= character_speed
+                character_to_x -= character_speed
             elif event.key == pygame.K_RIGHT:
-                to_x += character_speed
+                character_to_x += character_speed
             elif event.key == pygame.K_SPACE:
                 # 무기 위치 정의
                 weapon_x_pos = character_x_pos + (character_width / 2) - (weapon_width / 2)
@@ -93,9 +117,9 @@ while running:
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                to_x = 0
+                character_to_x = 0
 
-    character_x_pos += to_x * dt
+    character_x_pos += character_to_x * dt
     # 3. 게임 캐릭터 위치 정의
     if character_x_pos < 0:
         character_x_pos = 0
@@ -108,17 +132,45 @@ while running:
     # 천장에 닿은 무기 없애기
     weapons = [[w[0], w[1]] for w in weapons if w[1] > 0]
 
+    # 풍선 위치 정의
+    for balloon_idx, balloon_val in enumerate(balloons):
+        balloon_pos_x = balloon_val["pos_x"]
+        balloon_pos_y = balloon_val["pos_y"]
+        balloon_img_idx = balloon_val["img_idx"]
+
+        balloon_size = balloon_images[balloon_img_idx].get_rect().size
+        balloon_width = balloon_size[0]
+        balloon_height = balloon_size[1]
+
+        # 좌,우 벽에 닿았을 때 공 위치 변경(튕겨나가는 효과)
+        if balloon_pos_x < 0 or balloon_pos_x > screen_width - balloon_width:
+            balloon_val["to_x"] = balloon_val["to_x"] * -1
+
+        # 스테이지에 튕겨서 올라가는 효과
+        if balloon_pos_y >= screen_height - stage_height - balloon_height:
+            balloon_val["to_y"] = balloon_val["init_speed_y"]
+        # 그 외의 경우에는 속도를 줄여나감(포물선 효과)
+        else:
+            balloon_val["to_y"] += 0.5
+
+        balloon_val["pos_x"] += balloon_val["to_x"]
+        balloon_val["pos_y"] += balloon_val["to_y"]
+
     # 4. 충돌 처리
 
     # 5. 화면에 그리기 - screen.blit
     screen.blit(background, (0, 0))
-    for weapon_x_pos, weapon_y_pos in weapons :
+    for weapon_x_pos, weapon_y_pos in weapons:
         screen.blit(weapon, (weapon_x_pos, weapon_y_pos))
+
+    for idx, val in enumerate(balloons):
+        balloon_pos_x = val["pos_x"]
+        balloon_pos_y = val["pos_y"]
+        balloon_img_idx = val["img_idx"]
+        screen.blit(balloon_images[balloon_img_idx], (balloon_pos_x, balloon_pos_y))
+
     screen.blit(stage, (0, stage_y_pos))
     screen.blit(character, (character_x_pos, character_y_pos))
-
-
-
 
     pygame.display.update()
 
