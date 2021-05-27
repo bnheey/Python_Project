@@ -7,7 +7,7 @@
 ```shell
 - beautifulsoup, requests <scrapping(crawling) project>
 - pygame <게임 개발 project>
-  - pygame 기초 (character, enemy간 충돌 발생 시 게임 종료)
+- pygame 기초 (character, enemy간 충돌 발생 시 게임 종료)
 ```
 
 
