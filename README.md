@@ -1,9 +1,9 @@
-# ❤ Python Project ❤
+# ⚽ Python TIL⚽
 
-💛 python의 라이브러리를 이용하여 다양한 프로젝트를 진행해본다.<br>
-💛 2021.05.01 ~ 진행 중<br>
+🏈 python의 라이브러리를 이용하여 다양한 프로젝트를 진행해본다.<br>
+🏈 2021.05.01 ~ 진행 중<br>
 
-## 💙  목차 <br>
+## 🏐 목차 <br>
 ```shell
 - beautifulsoup, requests <scrapping(crawling) project>
 - pygame <게임 개발 project>
@@ -35,14 +35,35 @@
   pygame을 이용한 게임 개발 시 기본 틀은 <code>pygame_basic/8_fram.py</code>와 같다.
   <br><br>
   
+  
 - 똥피하기 게임
 
-  > pygame_homework/
+  > pygame_homework/ddong_avoid_game.py
   
   > <b>2021.05.24 (完)</b>
   
   위에서 배운 pygame 기초 개념 및 기본 틀을 이용하여, 실제 게임을 제작해보았다.<br>
   게임은 똥피하기 게임으로, 똥과 캐릭터가 충돌하는 경우 게임은 종료된다. 좌측 상단에 게임이 진행된 시간을 초 단위로 표시한다.<br>
-  그림은 임시로 그려서 사용하였으며(출처 본인_heeeon), 실습 내용은 아래와 같다.
+  모든 이미지는 직접 그려 사용하였으며(저작권 본인_heeeon), 실습 내용은 아래와 같다.
   
   <p align="center"><img src="pygame_homework/images/finished.png"></p>
+<br><br>
+
+- 풍선 쪼개기 게임
+
+  > pygame_project/split_balloon_game.py
+
+  > <b>2021.05.24 - 2021.05.27 (完)</b>
+
+  풍선 쪼개기 프로젝트를 진행하였다. 풍선은 각각 1~4레벨이 있으며 1레벨의 풍선을 터트리면 다음 레벨로 쪼개진다. 4레벨 풍선을 터트린 경우, 풍선은 사라진다.
+  <br>life는 3회로 지정되어있고, game over 조건은 아래의 3가지가 있다.
+  
+  ```shell
+  1. 풍선을 모두 터트린 경우(성공) - Mission Complete 문구가 뜬 후 2초 뒤 게임 종료
+  2. 풍선에 3회 이상 맞은 경우(실패) - Game Over 문구가 뜬 후 2초 뒤 게임 종료
+  3. 100초 안에 Clear하지 못한 경우(실패) - Time Over 문구가 뜬 후 2초 뒤 게임 종료
+  ```
+  
+  모든 이미지는 직접 그려 사용하였으며(저작권 본인_heeeon), 실습 내용은 아래와 같다.
+  <p align="center"><img src="pygame_project/images/split_ball_complete.png"></p>
+<br><br>
