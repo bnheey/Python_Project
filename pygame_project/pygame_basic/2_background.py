@@ -12,7 +12,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Myoung Game") # 게임 이름
 
 # 배경이미지 불러오기
-background = pygame.image.load("C:/Users/user/Desktop/PythonProject/pygame_basic/images/background.png")
+background = pygame.image.load("/pygame_project/pygame_basic/images/background.png")
 
 # 이벤트 루프
 running = True # 게임이 진행중인지 확인
