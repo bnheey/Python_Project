@@ -51,7 +51,7 @@
   게임은 똥피하기 게임으로, 똥과 캐릭터가 충돌하는 경우 게임은 종료된다. 좌측 상단에 게임이 진행된 시간을 초 단위로 표시한다.<br>
   모든 이미지는 직접 그려 사용하였으며(저작권 본인_heeeon), 실습 내용은 아래와 같다.
   
-  <p align="center"><img src="pygame_homework/images/finished.png"></p>
+  <p align="center"><img src="pygame_project/ddong_avoid/images/finished.png"></p>
   <br>
 </details>
 
@@ -72,7 +72,8 @@
   ```
   
   모든 이미지는 직접 그려 사용하였으며(저작권 본인_heeeon), 실습 내용은 아래와 같다.
-    <p align="center"><img src="pygame_project/images/split_ball_complete.png"></p>
-  <br>
+  <p align="center"><img src="pygame_project/images/split_ball_complete.png"></p>
+<br>
+
 </details><br>
 
