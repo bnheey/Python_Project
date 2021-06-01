@@ -72,7 +72,7 @@
   ```
   
   모든 이미지는 직접 그려 사용하였으며(저작권 본인_heeeon), 실습 내용은 아래와 같다.
-  <p align="center"><img src="pygame_project/images/split_ball_complete.png"></p>
+  <p align="center"><img src="pygame_project/split_balloon/images/split_ball_complete.png"></p>
 <br>
 
 </details><br>
