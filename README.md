@@ -81,7 +81,7 @@
 
 <code>tkinter</code>은 python 설치시 기본으로 내장되어있는 표준 GUI 라이브러리이다(BUT 유일한 GUI Programming toolkit은 아님). 이는 TCI/TK 위 얇은 객체 지향 레이어 이다.
 
-> pygame 라이브러리를 이용한 실습은 유튜브 '나도코딩'님 강좌를 참고하였습니다.<br>
+> tkinter 라이브러리를 이용한 실습은 유튜브 '나도코딩'님 강좌를 참고하였습니다.<br>
 
 <details>
   <summary><b>tkinter</b></summary><br>
