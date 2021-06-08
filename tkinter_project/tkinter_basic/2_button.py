@@ -20,20 +20,21 @@ btn4 = Button(root, width=10, height=3, text="버튼4")
 btn4.pack()
 
 # 버튼 색깔 지정
-btn5 = Button(root, fg="red", bg = "yellow", text="버튼5") # fg = foreground / bg = background
+btn5 = Button(root, fg="red", bg="yellow", text="버튼5")  # fg = foreground / bg = background
 btn5.pack()
 
 # 이미지 버튼
-photo = PhotoImage(file = "btn6_img.png")
+photo = PhotoImage(file="btn6_img.png")
 btn6 = Button(root, image=photo)
 btn6.pack()
+
 
 # 버튼에 동작 추가
 def btncmd():
     print("버튼이 클릭되었어요!")
 
-btn7 = Button(root, text = "동작하는 버튼", command = btncmd)
-btn7.pack()
 
+btn7 = Button(root, text="동작하는 버튼", command=btncmd)
+btn7.pack()
 
 root.mainloop()
