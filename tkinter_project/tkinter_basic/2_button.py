@@ -24,7 +24,7 @@ btn5 = Button(root, fg="red", bg="yellow", text="버튼5")  # fg = foreground / 
 btn5.pack()
 
 # 이미지 버튼
-photo = PhotoImage(file="btn6_img.png")
+photo = PhotoImage(file="img1.png")
 btn6 = Button(root, image=photo)
 btn6.pack()
 
