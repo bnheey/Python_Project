@@ -701,6 +701,6 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 *.tlog
 
-
+.idea/
 secret.py
 # End of https://www.toptal.com/developers/gitignore/api/python,windows,macos,pycharm,visualstudiocode,visualstudio,git
