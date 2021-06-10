@@ -77,3 +77,38 @@
 
 </details><br>
 
+## 3. tkinter<br>
+
+<code>tkinter</code>은 python 설치시 기본으로 내장되어있는 표준 GUI(Graphical User Interface) 라이브러리이다(BUT 유일한 GUI Programming toolkit은 아님). 이는 TCI/TK 위 얇은 객체 지향 레이어 이다.
+
+> tkinter 라이브러리를 이용한 실습은 유튜브 '나도코딩'님 강좌를 참고하였습니다.<br>
+
+<details>
+  <summary><b>tkinter basic</b></summary><br>
+  tkinter 라이브러리 기본 사용 방법에 대하여 학습한다. 아래 내용에 대하여 차례대로  실습을 진행하며, 기본 개념을 이해한다.
+  
+  - 기본 창 생성
+  - button
+  - label
+  - text entry 
+  - list box
+  - checkbox, radio button, combo box
+  - progress bar
+  - menu
+  - message box
+  - frame
+  - scroll bar
+  - grid
+  
+  
+  실습 예) 메뉴 창 만들어보기
+  <p align="center"><img src="tkinter_project/tkinter_basic/menu.png"></p>
+  <br>
+  실습 예) message box의 여러 속성 이용하기
+  <p align="center"><img src="tkinter_project/tkinter_basic/messagebox.JPG"></p>
+  <br>
+  실습 예) grid로 버튼을 배치하여 키패드 만들기
+  <p align="center"><img src="tkinter_project/tkinter_basic/grid.JPG"></p>
+  <br>
+</details>
+
