@@ -26,4 +26,24 @@ root.resizable(True, True)  # 조건 6 - OK 크기조정이 가능하도록 설�
 txt_box = Text(root, width=root.winfo_screenwidth(), height=root.winfo_screenheight())
 txt_box.pack()
 
+# 메뉴바 생성
+menu = Menu(root)
+
+# 파일 메뉴
+menu_file = Menu(menu, tearoff=0)
+menu_file.add_command(label="열기")
+menu_file.add_command(label="저장")
+
+menu_file.add_separator()
+menu_file.add_command(label="끝내기")
+
+menu.add_cascade(label="파일(F)", menu=menu_file)
+
+# 기타 메뉴
+menu.add_cascade(label="편집(E)")
+menu.add_cascade(label="서식(O)")
+menu.add_cascade(label="보기(V)")
+menu.add_cascade(label="도움말(H)")
+
+root.config(menu=menu)
 root.mainloop()
