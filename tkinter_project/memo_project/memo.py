@@ -18,9 +18,12 @@ from tkinter import *
 
 root = Tk()
 root.title("제목없음 - windows 메모장")
-root.geometry("640x480")
+root.geometry("640x480")  # 크기 지정
 
-root.resizable(True, True)
+root.resizable(True, True)  # 조건 6 - OK 크기조정이 가능하도록 설정
 
+# 화면 전체에 텍스트 엔트리 배치
+txt_box = Text(root, width=root.winfo_screenwidth(), height=root.winfo_screenheight())
+txt_box.pack()
 
 root.mainloop()
