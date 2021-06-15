@@ -29,15 +29,25 @@ txt_box.pack()
 # 메뉴바 생성
 menu = Menu(root)
 
-# 파일 메뉴
+# 파일 메뉴 함수 - 열기, 저장
+def open_file():
+    return 0
+
+def save_file():
+    return 0
+
+# 파일 메뉴 배치
 menu_file = Menu(menu, tearoff=0)
-menu_file.add_command(label="열기")
-menu_file.add_command(label="저장")
+menu_file.add_command(label="열기(O)", command=open_file)
+menu_file.add_command(label="저장(S)", command=save_file)
 
 menu_file.add_separator()
-menu_file.add_command(label="끝내기")
+menu_file.add_command(label="끝내기(X)", command=root.quit)
 
 menu.add_cascade(label="파일(F)", menu=menu_file)
+
+
+
 
 # 기타 메뉴
 menu.add_cascade(label="편집(E)")
