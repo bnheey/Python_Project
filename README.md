@@ -85,6 +85,9 @@
 
 <details>
   <summary><b>tkinter basic</b></summary><br>
+
+  > tkinter_project/tkinter_basic
+> 
   tkinter 라이브러리 기본 사용 방법에 대하여 학습한다. 아래 내용에 대하여 차례대로  실습을 진행하며, 기본 개념을 이해한다.
   
   - 기본 창 생성
@@ -101,14 +104,31 @@
   - grid
   
   
-  실습 예) 메뉴 창 만들어보기
+  실습 예) 메뉴 창 만들어보기<br>
   <p align="center"><img src="tkinter_project/tkinter_basic/menu.png"></p>
   <br>
-  실습 예) message box의 여러 속성 이용하기
+  실습 예) message box의 여러 속성 이용하기<br>
   <p align="center"><img src="tkinter_project/tkinter_basic/messagebox.JPG"></p>
   <br>
-  실습 예) grid로 버튼을 배치하여 키패드 만들기
+  실습 예) grid로 버튼을 배치하여 키패드 만들기<br>
+
   <p align="center"><img src="tkinter_project/tkinter_basic/grid.JPG"></p>
   <br>
 </details>
 
+<details>
+  <summary><b>memo project</b></summary><br>
+  
+  > tkinter_project/memo_project/memo.py
+  
+  windows 메모장과 동일한 창을 구현해본다. 실습 조건은 다음과 같다.
+  ```text
+  메뉴 바는 파일(F), 편집(E), 서식(O), 보기(V), 도움말(H)로 구성된다.
+  이때 실제 동작은 파일의 3가지 항목(열기, 저장, 끝내기)에 대해서만 처리한다.
+  text box 우측에 scroll bar를 함께 배치한다.
+  ```
+
+  실제 구현 내용은 아래 그림에서 확인할 수 있다.
+  <p align="center"><img src="tkinter_project/memo_project/meno_complete.png"></p>
+  <br>
+</details>
