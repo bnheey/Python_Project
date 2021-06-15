@@ -13,3 +13,14 @@ tkinter를 이용한 메모장 프로그램 만들기
 6. 프로그램 크기, 위치는 자유롭게 하되 크기 조정이 가능해야함
 7. 본문 우측에 상하 스크롤바 넣기
 '''
+
+from tkinter import *
+
+root = Tk()
+root.title("제목없음 - windows 메모장")
+root.geometry("640x480")
+
+root.resizable(True, True)
+
+
+root.mainloop()
