@@ -22,8 +22,12 @@ root.geometry("640x480")  # 크기 지정
 
 root.resizable(True, True)  # 조건 6 - OK 크기조정이 가능하도록 설정
 
+# 스크롤 바 생성 -> 조건 6 -> OK
+scrollbar = Scrollbar(root)
+scrollbar.pack(side="right", fill="y")
+
 # 화면 전체에 텍스트 엔트리 배치
-txt_box = Text(root)
+txt_box = Text(root, yscrollcommand=scrollbar.set)
 txt_box.pack(side="left", fill="both", expand="True")
 
 # 메뉴바 생성
