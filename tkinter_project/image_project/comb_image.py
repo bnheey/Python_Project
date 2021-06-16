@@ -19,3 +19,12 @@
 8. 진행상황 : 현재 진행중인 파일 순서에 맞게 반영
 9. 닫기 : 프로그램 종료
 '''
+
+
+from tkinter import *
+
+root = Tk()
+root.title("Combine Image Program") # 조건 1 - OK
+root.geometry("640x480")  # 크기 지정
+
+root.mainloop()
