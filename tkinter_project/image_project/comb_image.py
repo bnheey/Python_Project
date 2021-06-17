@@ -1,7 +1,7 @@
 '''
 여러 이미지를 합쳐서 하나의 이미지로 만들어주는 프로그램 제작 프로젝트
 
-[사용자 시나리요]
+[사용자 시나리오]
 1. 사용자는 합치려는 이미지를 1개 이상 선택한다.
 2. 합쳐진 이미지가 저장될 경로를 지정한다.
 3. 가로넓이, 간격, 포맷 옵션을 지정한다.
@@ -25,6 +25,16 @@ from tkinter import *
 
 root = Tk()
 root.title("Combine Image Program") # 조건 1 - OK
-root.geometry("640x480")  # 크기 지정
 
+# 파일 프레임(파일 추가, 선택 삭제 영역)
+file_frame = Frame(root)
+file_frame.pack()
+
+btn_add_file = Button(file_frame, padx=5, pady=5, width=12, text="파일추가")
+btn_add_file.pack(side="left")
+
+btn_del_file = Button(file_frame, padx=5, pady=5, width=12, text="선택삭제")
+btn_del_file.pack(side="right")
+
+root.resizable(False, False)
 root.mainloop()
