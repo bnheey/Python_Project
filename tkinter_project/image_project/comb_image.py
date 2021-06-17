@@ -20,12 +20,11 @@
 9. 닫기 : 프로그램 종료
 '''
 
-
 from tkinter import *
 import tkinter.ttk as ttk
 
 root = Tk()
-root.title("Combine Image Program") # 조건 1 - OK
+root.title("Combine Image Program")  # 조건 1 - OK
 
 # 파일 프레임(파일 추가, 선택 삭제 영역)
 file_frame = Frame(root)
@@ -38,7 +37,7 @@ btn_del_file = Button(file_frame, padx=5, pady=5, width=12, text="선택삭제")
 btn_del_file.pack(side="right")
 
 # 리스트 프레임
-list_frame=Frame(root)
+list_frame = Frame(root)
 list_frame.pack(fill="both")
 
 scrollbar = Scrollbar(list_frame)
@@ -92,6 +91,13 @@ cmb_format = ttk.Combobox(frame_option, state="readonly", values=opt_format, wid
 cmb_format.current(0)
 cmb_format.pack(side="left")
 
+# 진행 상황 Progress Bar
+frame_progress = LabelFrame(root, text="진행상황")
+frame_progress.pack(fill="x")
+
+p_var = DoubleVar()
+progress_bar = ttk.Progressbar(frame_progress, maximum=100, variable=p_var)
+progress_bar.pack(fill="x")
 
 root.resizable(False, False)
 root.mainloop()
