@@ -62,8 +62,11 @@ def merge_image():
     images = [Image.open(x) for x in list_file.get(0, END)]
     # 이미지들의 가로, 세로 크기를 각각 widths, heights에 저장
     # size -> size[0] : width, size[1] : height
-    widths = [x.size[0] for x in images]
-    heights = [x.size[1] for x in images]
+    # widths = [x.size[0] for x in images]
+    # heights = [x.size[1] for x in images]
+
+    widths, heights = zip(*(x.size for x in images))
+
 
     # print("width :", widths)
     # print("heights :", heights)
