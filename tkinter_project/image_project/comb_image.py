@@ -19,11 +19,13 @@
 8. 진행상황 : 현재 진행중인 파일 순서에 맞게 반영
 9. 닫기 : 프로그램 종료
 '''
-
+import os
 from tkinter import *
 import tkinter.ttk as ttk
 import tkinter.messagebox as msgbox
 from tkinter import filedialog
+
+from PIL import Image
 
 root = Tk()
 root.title("Combine Image Program")  # 조건 1 - OK
@@ -32,7 +34,7 @@ root.title("Combine Image Program")  # 조건 1 - OK
 # 파일 추가 함수
 def add_file():
     files = filedialog.askopenfilenames(title="이미지 파일을 선택하세요", filetypes=(("PNG 파일", "*.png"), ("모든파일", "*.*")),
-                                        initialdir=r"C:\Users\user\Desktop\PythonProject")
+                                        initialdir=r"C:\Users\user\Desktop\PythonProject\tkinter_project\image_project")
 
     # 사용자가 선택한 파일 목록 출력
     for file in files:
@@ -54,6 +56,40 @@ def browse_dest_path():
     txt_dest_path.insert(0, folder_selected)
 
 
+# 이미지 통합
+def merge_image():
+    # print(list_file.get(0, END))
+    images = [Image.open(x) for x in list_file.get(0, END)]
+    # 이미지들의 가로, 세로 크기를 각각 widths, heights에 저장
+    # size -> size[0] : width, size[1] : height
+    widths = [x.size[0] for x in images]
+    heights = [x.size[1] for x in images]
+
+    # print("width :", widths)
+    # print("heights :", heights)
+
+    max_width, total_height = max(widths), sum(heights)
+
+    # 크기에 맞는 흰색 배경 준비
+    result_img = Image.new("RGB", (max_width, total_height), (255, 255, 255))
+    y_offset = 0  # y 위치
+    # for img in images:
+    #     result_img.paste(img, (0, y_offset))
+    #     y_offset += img.size[1] # img의 height 값 만큼 더해줌
+
+    for idx, img in enumerate(images):
+        result_img.paste(img, (0, y_offset))
+        y_offset += img.size[1]  # img의 height 값 만큼 더해줌
+
+        progress = (idx + 1) / len(images) * 100  # 실제 퍼센트 정보를 계산
+        p_var.set(progress)
+        progress_bar.update()
+
+    dest_path = os.path.join(txt_dest_path.get(), "result.jpg")
+    result_img.save(dest_path)
+    msgbox.showinfo("알림", "작업이 완료되었습니다.")
+
+
 # 시작
 def start():
     # 각 옵션들 값을 확인
@@ -67,6 +103,9 @@ def start():
     # 저장 경로 확인
     if len(txt_dest_path.get()) == 0:
         msgbox.showwarning("경고", "저장 경로를 선택하세요")
+
+    # 이미지 통합 작업
+    merge_image()
 
 
 # 파일 프레임(파일 추가, 선택 삭제 영역)
