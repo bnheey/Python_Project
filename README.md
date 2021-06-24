@@ -201,3 +201,5 @@ windows 메모장과 동일한 창을 구현해본다. 실습 조건은 다음�
   <p align="center"><img src="tkinter_project/image_project/comb_image_complete.JPG"></p>
   <br>
 </details>
+
+## 3-1. imageGrab<br>
